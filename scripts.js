@@ -21,3 +21,10 @@ for (let pixel of pixels) {
         pixel.style.background = "black";
     })
 }
+
+const clearSketchBtn = document.querySelector(".reset-button");
+
+clearSketchBtn.addEventListener("click", () => {
+    const container = document.querySelector(".container");
+    container.innerHTML = "";
+})
