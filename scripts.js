@@ -12,19 +12,41 @@ function createDivs(numDivs) {
     }
 }
 
-createDivs(256);
+function mouseOverEvent() {
+    const pixels = document.querySelectorAll(".pixel");
 
-const pixels = document.querySelectorAll(".pixel");
-
-for (let pixel of pixels) {
-    pixel.addEventListener("mouseover", () => {
-        pixel.style.background = "black";
-    })
+    for (let pixel of pixels) {
+        pixel.addEventListener("mouseover", () => {
+            function getRandomRGB() {
+                const r = Math.floor(Math.random() * 256); // Random between 0-255
+                const g = Math.floor(Math.random() * 256); 
+                const b = Math.floor(Math.random() * 256); 
+              
+                return `rgb(${r}, ${g}, ${b})`;
+              }
+            pixel.style.background = getRandomRGB();
+        })
+    }
 }
 
-const clearSketchBtn = document.querySelector(".reset-button");
+createDivs(256);
+mouseOverEvent();
 
-clearSketchBtn.addEventListener("click", () => {
+const resetSketchBtn = document.querySelector(".reset-button");
+
+resetSketchBtn.addEventListener("click", () => {
     const container = document.querySelector(".container");
     container.innerHTML = "";
-})
+
+    const newSketchSize = parseInt(prompt("What size square would you like your new sketch pad to be?"));
+    if (newSketchSize > 100) {
+        newSketchSize = parseInt(prompt("Please enter a number less than or equal to 100"));
+    } else if (newSketchSize <= 100) {
+        container.style.width = `${newSketchSize * 20}px`;
+        createDivs(newSketchSize**2);
+    } else {
+        alert("Error");
+    }
+
+    mouseOverEvent();  
+});
