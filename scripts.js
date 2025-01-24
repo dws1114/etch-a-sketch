@@ -21,4 +21,3 @@ for (let pixel of pixels) {
         pixel.style.background = "black";
     })
 }
-
